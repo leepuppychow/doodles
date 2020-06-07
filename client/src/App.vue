@@ -43,9 +43,7 @@ export default {
     },
     draw(event) {
       if (!this.isDrawing) return;
-
-      const { canvas } = this.$refs;
-      const canvasPosition = canvas.getBoundingClientRect();
+      const canvasPosition = this.$refs.canvas.getBoundingClientRect();
 
       this.canvasContext.beginPath();
       this.canvasContext.lineWidth = 5;
