@@ -31,6 +31,11 @@ export default {
     window.addEventListener('resize', this.resizeCanvas);
     this.resizeCanvas();
   },
+  computed: {
+    canvasContext() {
+      return this.$refs.canvas.getContext('2d');
+    },
+  },
   methods: {
     resizeCanvas() {
       this.canvasWidth = window.innerWidth * CANVAS_WIDTH_PERCENT;
@@ -40,19 +45,18 @@ export default {
       if (!this.isDrawing) return;
 
       const { canvas } = this.$refs;
-      const context = canvas.getContext('2d');
       const canvasPosition = canvas.getBoundingClientRect();
 
-      context.beginPath();
-      context.lineWidth = 5;
-      context.lineCap = 'round';
-      context.strokeStyle = 'green';
+      this.canvasContext.beginPath();
+      this.canvasContext.lineWidth = 5;
+      this.canvasContext.lineCap = 'round';
+      this.canvasContext.strokeStyle = 'green';
 
       this.cursorX = event.clientX - canvasPosition.left;
       this.cursorY = event.clientY - canvasPosition.top;
 
-      context.lineTo(this.cursorX, this.cursorY);
-      context.stroke();
+      this.canvasContext.lineTo(this.cursorX, this.cursorY);
+      this.canvasContext.stroke();
     }
   },
 }
